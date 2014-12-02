@@ -235,14 +235,9 @@ public final class DcTracker extends DcTrackerBase {
         if (DBG) log(LOG_TAG + ".constructor");
 
         if (p.getPhoneType() == PhoneConstants.PHONE_TYPE_CDMA) {
-            final boolean fetchApnFromOmhCard = p.getContext().getResources().
-                    getBoolean(com.android.internal.R.bool.config_fetch_apn_from_omh_card);
-            log(LOG_TAG + " fetchApnFromOmhCard: " + fetchApnFromOmhCard);
-            if (fetchApnFromOmhCard) {
-                mOmhApt = new CdmaApnProfileTracker((CDMAPhone)p);
-                mOmhApt.registerForModemProfileReady(this,
-                        DctConstants.EVENT_MODEM_DATA_PROFILE_READY, null);
-            }
+            mOmhApt = new CdmaApnProfileTracker((CDMAPhone)p);
+            mOmhApt.registerForModemProfileReady(this,
+                    DctConstants.EVENT_MODEM_DATA_PROFILE_READY, null);
         }
 
         mDataConnectionTracker = this;
